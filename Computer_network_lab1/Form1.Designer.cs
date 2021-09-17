@@ -57,12 +57,13 @@
             // TrackBar
             // 
             this.TrackBar.Location = new System.Drawing.Point(629, 12);
-            this.TrackBar.Maximum = 1000000;
+            this.TrackBar.Maximum = 100000;
             this.TrackBar.Minimum = 1000;
             this.TrackBar.Name = "TrackBar";
             this.TrackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.TrackBar.Size = new System.Drawing.Size(45, 600);
             this.TrackBar.TabIndex = 2;
+            this.TrackBar.TickFrequency = 100;
             this.TrackBar.Value = 1000;
             // 
             // label1
@@ -77,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 666);
+            this.ClientSize = new System.Drawing.Size(675, 666);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TrackBar);
             this.Controls.Add(this.StartButton);

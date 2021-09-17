@@ -18,15 +18,13 @@ namespace Computer_network_lab1
             InitializeComponent();
         }
 
-        double a = 1;
-        double b = 1;
-
-        int h = 0;
         private void CalculateAreaUnderCurve()
         {
 
         }
 
+        //double f = 1 / Math.Sqrt(2 * Math.Pow(x, 2) + 1);
+        //ответ 0.810496989476754
         // y = f(x) кривая
 
         //Сгенерировать случайную точку на промежутке от 0 до 1
@@ -34,55 +32,59 @@ namespace Computer_network_lab1
         //Проверить попала ли точка в площадь фигуры y<=f(x), если да то h+1
 
         //Пройдя N итераций вычисляем h/N это и есть интеграл
-        // Use Monte Carlo simulation to estimate pi.
+
+
+        // Метод Монте Карло для расчёта PI
+
+        //Квадрат имеет площадь 1, а круг должен иметь площадь PI * R^2 радиус нам дан и равен 0,5 решить данное уравнение относительно PI
         private void MonteCarloPi()
         {
             long N = Convert.ToInt64(TrackBar.Value);
             Random rand = new Random();
 
-            // Make a bitmap to show points.
+            // Создание битмапа для отрисовки
             int wid = pictureBox1.ClientSize.Width;
             int hgt = pictureBox1.ClientSize.Height;
             Bitmap bm = new Bitmap(wid, hgt);
+
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
                 gr.DrawEllipse(Pens.Black, 0, 0, wid - 1, hgt - 1);
             }
 
-            // Make the random points.
             int numHits = 0;
             for (int i = 0; i < N; i++)
             {
-                // Make a random point 0 <= x < 1.
+                // Создаём случайную точку от 0 до 1
                 double x = rand.NextDouble();
                 double y = rand.NextDouble();
 
-                // See how far the point is from (0.5, 0.5).
+                // Проверка на попадание в круг
                 double dx = x - 0.5;
                 double dy = y - 0.5;
                 if (dx * dx + dy * dy < 0.25) numHits++;
 
-                // Plots up to 10,000 points.
-                if (i < 10000)
+                // отрисовка точек
+                if (i < 1000000)
                 {
                     int ix = (int)(wid * x);
                     int iy = (int)(hgt * y);
                     if (dx * dx + dy * dy < 0.25)
                         bm.SetPixel(ix, iy, Color.Gray);
                     else
-                        bm.SetPixel(ix, iy, Color.Black);
+                        bm.SetPixel(ix, iy, Color.Red);
                 }
             }
 
-            // Display the plotted points.
+            // Отображение точек
             pictureBox1.Image = bm;
 
 
-            // Get the hit fraction.
+            // Доля попаданий
             double fraction = numHits / (double)N;
 
-            // Estimate pi.
+            // Результат
             double output = 4.0 * fraction;
             label1.Text = output.ToString();
 
