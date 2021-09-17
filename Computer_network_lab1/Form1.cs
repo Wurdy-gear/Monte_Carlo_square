@@ -26,7 +26,6 @@ namespace Computer_network_lab1
         {
 
         }
-
         // y = f(x) кривая
 
         //Сгенерировать случайную точку на промежутке от 0 до 1
@@ -38,6 +37,9 @@ namespace Computer_network_lab1
         private void MonteCarloPi()
         {
             long N = Convert.ToInt64(TrackBar.Value);
+
+
+            Point[] Curve = new Point[] { };
             Random rand = new Random();
 
             // Make a bitmap to show points.
@@ -47,9 +49,15 @@ namespace Computer_network_lab1
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
-                gr.DrawEllipse(Pens.Black, 0, 0, wid - 1, hgt - 1);
             }
 
+            for(int i = 0; i < pictureBox1.Width; i++)
+            {
+                int y = Convert.ToInt32(1 / (Math.Sqrt(2 * Math.Pow(i, 2) + 1)));
+                Curve[i] = new Point { X = i, Y = y };
+                bm.SetPixel(Curve[i].X, Curve[i].Y, Color.Black);
+            }
+            /*
             // Make the random points.
             int numHits = 0;
             for (int i = 0; i < N; i++)
@@ -63,8 +71,8 @@ namespace Computer_network_lab1
                 double dy = y - 0.5;
                 if (dx * dx + dy * dy < 0.25) numHits++;
 
-                // Plots up to 10,000 points.
-                if (i < 10000)
+                // Отрисовка точек
+                if (i < 100000)
                 {
                     int ix = (int)(wid * x);
                     int iy = (int)(hgt * y);
@@ -74,17 +82,17 @@ namespace Computer_network_lab1
                         bm.SetPixel(ix, iy, Color.Black);
                 }
             }
-
+            */
             // Display the plotted points.
             pictureBox1.Image = bm;
 
 
             // Get the hit fraction.
-            double fraction = numHits / (double)N;
+           // double fraction = numHits / (double)N;
 
             // Estimate pi.
-            double output = 4.0 * fraction;
-            label1.Text = output.ToString();
+           // double output = 4.0 * fraction;
+           // label1.Text = output.ToString();
 
         }
 
