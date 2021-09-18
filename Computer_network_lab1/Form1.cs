@@ -73,6 +73,11 @@ namespace Computer_network_lab1
             // Вычисляем интеграл
              double output = (double) numHits / N;
              label1.Text = output.ToString();
+
+            double alpha = Math.Abs(0.810496989476754 - output);
+            double alphaPercent = ((Math.Abs(0.810496989476754 - output))/ 0.810496989476754) *100;
+            label2.Text = "Отклонение от нахождения площади численным интегрированием: " + Math.Round(alpha,10) + "\nЧто составляет " + Math.Round(alphaPercent,5) + " %";
+
         }
 
         private void StartButton_Click(object sender, EventArgs e)
